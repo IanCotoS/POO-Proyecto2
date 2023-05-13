@@ -9,6 +9,7 @@ public class Orden {
     // Atributos
     ArrayList<Hamburguesa> hamburguesas;
     boolean listo;
+    double precio;
 
     // Constructor
     public Orden() {
@@ -25,30 +26,38 @@ public class Orden {
         return listo;
     }
 
-    public int getPrecio() {
-        int precio = 0;
-        for (Hamburguesa hamburguesa : hamburguesas) {
-            precio += hamburguesa.getPrecio();
-        }
-        return precio;
-    }
-
     public String getDescripcion() {
-        String descripcion = "Hambuguesas:";
+        String descripcion = "Está listo: " + getListo() + 
+        "\nHambuguesas: (" + hamburguesas.size() + " en total)";
         int cont = 1;
         for (Hamburguesa hamburguesa : hamburguesas) {
-            descripcion += "\n" + cont + ". " + hamburguesa.getDescripcion();
+            descripcion += "\n" + cont + ". " + hamburguesa.getDescripcion() + "\nPrecio: " + hamburguesa.getPrecio();
             cont++;
         }
+        descripcion += "\nPrecio total: " + getPrecio();
         return descripcion;
     }
 
-    // Setters
-    public void agregarHamburguesa(Hamburguesa newHamburguesa) {
-        this.hamburguesas.add(newHamburguesa);
+    public double getPrecio() {
+        return precio;
     }
 
+    // Setters
     public void estaListo() {
         this.listo = true;
     }
+
+    public void calcularPrecio(Hamburguesa newHamburguesa) {
+        this.precio = newHamburguesa.getPrecio();
+    }
+
+    public void agregarCosto(Hamburguesa newHamburguesa) {
+        this.precio += newHamburguesa.getPrecio();
+    }
+
+    public void agregarHamburguesa(Hamburguesa newHamburguesa) {
+        this.hamburguesas.add(newHamburguesa);
+        agregarCosto(newHamburguesa);
+    }
+
 } // Fin clase Orden
