@@ -42,6 +42,7 @@ public class MakerOrdenes { // Como el app del paquete
         orden1.estaListo();
         System.out.println("\nOrden Completa:");
         System.out.println("Está listo: " + orden1.getListo());
+        System.out.println("Descripción: " + orden1.getDescripcion());
         System.out.println("Precio: " + orden1.getPrecio());
     }   
 }

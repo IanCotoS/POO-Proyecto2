@@ -33,6 +33,16 @@ public class Orden {
         return precio;
     }
 
+    public String getDescripcion() {
+        String descripcion = "Hambuguesas:";
+        int cont = 1;
+        for (Hamburguesa hamburguesa : hamburguesas) {
+            descripcion += "\n" + cont + ". " + hamburguesa.getDescripcion();
+            cont++;
+        }
+        return descripcion;
+    }
+
     // Setters
     public void agregarHamburguesa(Hamburguesa newHamburguesa) {
         this.hamburguesas.add(newHamburguesa);
