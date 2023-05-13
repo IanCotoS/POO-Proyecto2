@@ -1,9 +1,9 @@
 package com.Comida;
 
-public interface Precios {
+public interface Precios{
 
     // Todos funcionan como public static final por defecto
-    double PRECIO_PAN = 10000;
+    double PRECIO_PAN = 250;
     double PRECIO_CARNE = 800;
     double PRECIO_LECHUGA = 25;
     double PRECIO_TOMATE = 50;
