@@ -1,3 +1,8 @@
+package com.Comida.Ingredientes;
+
+import com.Comida.Hamburguesa.*;
+import com.Comida.Precios;
+
 public class Queso extends IngredienteDecorador{
 
     public Queso(Hamburguesa newHamburguesa) {

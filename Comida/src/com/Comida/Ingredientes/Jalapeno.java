@@ -1,3 +1,8 @@
+package com.Comida.Ingredientes;
+
+import com.Comida.Precios;
+import com.Comida.Hamburguesa.*;
+
 public class Jalapeno extends IngredienteDecorador{
 
     public Jalapeno(Hamburguesa newHamburguesa) {

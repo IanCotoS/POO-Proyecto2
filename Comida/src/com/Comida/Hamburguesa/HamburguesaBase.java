@@ -1,3 +1,7 @@
+package com.Comida.Hamburguesa;
+
+import com.Comida.Precios;
+
 public class HamburguesaBase implements Hamburguesa{
 
     @Override

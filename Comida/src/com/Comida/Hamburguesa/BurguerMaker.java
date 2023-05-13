@@ -1,3 +1,7 @@
+package com.Comida.Hamburguesa;
+
+import com.Comida.Ingredientes.*;
+
 public class BurguerMaker { // Como el app del paquete
     public static void main(String[] args) throws Exception {
         

@@ -1,3 +1,7 @@
+package com.Comida.Ingredientes;
+
+import com.Comida.Hamburguesa.*;
+
 abstract class IngredienteDecorador implements Hamburguesa{
 
     protected Hamburguesa tempHamburguesa;
