@@ -1,6 +1,6 @@
 package ViewCocina;
 
-import java.awt.BorderLayout;
+/*import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
-
+/*
 import utilidades.GestionCeldas;
 import utilidades.GestionEncabezadoTabla;
 import utilidades.ModeloTabla;
@@ -27,12 +27,12 @@ import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class VentanaTabla extends JFrame implements MouseListener{
+/*public class VentanaTabla extends JFrame implements MouseListener{
 
 	private JPanel contentPane;
 	private JScrollPane scrollPaneTabla;
 	private JTable tablaPersonas;
-	ArrayList<PersonaVo> listaPersonas;//lista que simula la informaci�n de la BD
+	//ArrayList<PersonaVo> listaPersonas;//lista que simula la informaci�n de la BD
 	
 	ModeloTabla modelo;//modelo definido en la clase ModeloTabla
 	private int filasTabla;
@@ -40,14 +40,14 @@ public class VentanaTabla extends JFrame implements MouseListener{
 
 	/**
 	 * Create the frame.
-	 */
+	
 	public VentanaTabla() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1121, 453);
 		
 		iniciarComponentes();
 		setLocationRelativeTo(null);
-		construirTabla();
+		//construirTabla();
 	}
 
 	private void iniciarComponentes() {
@@ -77,7 +77,7 @@ public class VentanaTabla extends JFrame implements MouseListener{
 	 * Metodo que permite construir la tabla de personas
 	 * se crean primero las columnas y luego se asigna la informaci�n
 	 */
-	private void construirTabla() {
+	/*private void construirTabla() {
 		
 		listaPersonas=consultarListaPersonas();
 		
@@ -100,21 +100,21 @@ public class VentanaTabla extends JFrame implements MouseListener{
 		String titulos[] = new String[titulosList.size()];
 		for (int i = 0; i < titulos.length; i++) {
 			titulos[i]=titulosList.get(i);
-		}
+		}*/
 		/*obtenemos los datos de la lista y los guardamos en la matriz
 		 * que luego se manda a construir la tabla
 		 */
-		Object[][] data =obtenerMatrizDatos(titulosList);
+		/*Object[][] data =obtenerMatrizDatos(titulosList);
 		construirTabla(titulos,data);
 		
-	}
+	}*/
 
 	/**
 	 * Permite simular el llenado de personas en una lista
 	 * que posteriormente alimentar� la tabla
 	 * @return
 	 */
-	private ArrayList<PersonaVo> consultarListaPersonas() {
+	/*private ArrayList<PersonaVo> consultarListaPersonas() {
 		ArrayList<PersonaVo> lista=new ArrayList<>();
 		
 		lista.add(new PersonaVo("1234", "Cristian David Henao", "Calle 2# 23-09 Armenia", "7564323", "Ingeniero",23, 2.5, 4.3, 3.0, (2.5+4.3+3)/33));
@@ -126,7 +126,7 @@ public class VentanaTabla extends JFrame implements MouseListener{
 		lista.add(new PersonaVo("1221", "Cristian mendez Henao", "Calle 2# 23-09 Armenia", "7564323", "Ingeniero",0, 0, 0,0,0));
 		
 		return lista;
-	}
+	}*/
 
 	/**
 	 * Llena la informaci�n de la tabla usando la lista de personas trabajada 
@@ -135,13 +135,13 @@ public class VentanaTabla extends JFrame implements MouseListener{
 	 * @param titulosList
 	 * @return
 	 */
-	private Object[][] obtenerMatrizDatos(ArrayList<String> titulosList) {
+	/*private Object[][] obtenerMatrizDatos(ArrayList<String> titulosList) {
 		
 		/*se crea la matriz donde las filas son dinamicas pues corresponde
 		 * a todos los usuarios, mientras que las columnas son estaticas
 		 * correspondiendo a las columnas definidas por defecto
 		 */
-		String informacion[][] = new String[listaPersonas.size()][titulosList.size()];
+	/*	String informacion[][] = new String[listaPersonas.size()][titulosList.size()];
 		
 		for (int x = 0; x < informacion.length; x++) {
 			
@@ -161,7 +161,7 @@ public class VentanaTabla extends JFrame implements MouseListener{
 		}
 		
 		return informacion;
-	}
+	}*/
 	
 	/**
 	 * Con los titulos y la informaci�n a mostrar se crea el modelo para 
@@ -170,7 +170,7 @@ public class VentanaTabla extends JFrame implements MouseListener{
 	 * @param titulos
 	 * @param data
 	 */
-	private void construirTabla(String[] titulos, Object[][] data) {
+	/*private void construirTabla(String[] titulos, Object[][] data) {
 		modelo=new ModeloTabla(data, titulos);
 		//se asigna el modelo a la tabla
 		tablaPersonas.setModel(modelo);
@@ -219,9 +219,9 @@ public class VentanaTabla extends JFrame implements MouseListener{
 	    scrollPaneTabla.setViewportView(tablaPersonas);
 
 
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public void mouseClicked(MouseEvent e) {
 		//capturo fila o columna dependiendo de mi necesidad
 		int fila = tablaPersonas.rowAtPoint(e.getPoint());
@@ -229,10 +229,10 @@ public class VentanaTabla extends JFrame implements MouseListener{
 		
 		/*uso la columna para valiar si corresponde a la columna de perfil garantizando
 		 * que solo se produzca algo si selecciono una fila de esa columna
-		 */
+		
 		if (columna==Utilidades.PERFIL) {
 			//sabiendo que corresponde a la columna de perfil, envio la posicion de la fila seleccionada
-			validarSeleccionMouse(fila);
+			//validarSeleccionMouse(fila);
 		}else if (columna==Utilidades.EVENTO){//se valida que sea la columna del otro evento
 			JOptionPane.showMessageDialog(null, "Evento del otro icono");
 		}
@@ -244,7 +244,7 @@ public class VentanaTabla extends JFrame implements MouseListener{
 	 * se presiona alguno de los botones o iconos de la tabla
 	 * @param fila
 	 */
-	private void validarSeleccionMouse(int fila) {
+	/*private void validarSeleccionMouse(int fila) {
 		Utilidades.filaSeleccionada=fila;
 		
 		
@@ -287,4 +287,4 @@ public class VentanaTabla extends JFrame implements MouseListener{
 	}
 
 	
-}
+}*/

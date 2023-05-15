@@ -4,7 +4,7 @@ import java.awt.Component;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+//import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -48,9 +48,9 @@ public class GestionCeldas extends DefaultTableCellRenderer{
 		
 		/*
 		 * Este metodo controla toda la tabla, podemos obtener el valor que contiene
-		 * definir que celda est� seleccionada, la fila y columna al tener el foco en ella.
+		 * definir que celda esta seleccionada, la fila y columna al tener el foco en ella.
 		 * 
-		 * cada evento sobre la tabla invocar� a este metodo
+		 * cada evento sobre la tabla invocara a este metodo
 		 */
 		
 		//definimos colores por defecto
