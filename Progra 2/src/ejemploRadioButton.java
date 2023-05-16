@@ -1,3 +1,5 @@
+import java.awt.Checkbox;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -6,6 +8,7 @@ public class ejemploRadioButton extends JFrame implements ChangeListener {
 
     private JRadioButton radio1, radio2, radio3;
     private ButtonGroup grupoBotones;
+    private JCheckBox checkbox;
 
     public ejemploRadioButton() {
 
@@ -31,6 +34,11 @@ public class ejemploRadioButton extends JFrame implements ChangeListener {
         add(radio3);
         grupoBotones.add(radio3);
 
+        checkbox = new JCheckBox("Activado");
+        checkbox.setBounds(15, 140, 100, 30);
+        checkbox.addChangeListener(this);
+        add(checkbox);
+
         //Configurar y mostrar JFrame
         initPantalla();
     }
@@ -46,38 +54,7 @@ public class ejemploRadioButton extends JFrame implements ChangeListener {
     }
 
     public static void main(String[] args) {
-        //new ejemploRadioButton();
-        // Crear la ventana
-        JFrame ventana = new JFrame("Ejemplo de Ventana");
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setSize(300, 200);
-
-        // Crear el RadioButton
-        JRadioButton radioButton = new JRadioButton("Opción");
-        radioButton.setBounds(20, 20, 100, 30);
-
-        // Crear el Panel
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
-        panel.setBounds(20, 60, 260, 80);
-
-        // Crear el Label
-        JLabel label = new JLabel("Etiqueta");
-        label.setBounds(10, 10, 100, 30);
-
-        // Crear el CheckBox
-        JCheckBox checkBox = new JCheckBox("Activado");
-        checkBox.setBounds(120, 10, 100, 30);
-
-        // Agregar el RadioButton, el Panel y el CheckBox a la ventana
-        ventana.add(radioButton);
-        panel.add(label);
-        panel.add(checkBox);
-        ventana.add(panel);
-
-        // Mostrar la ventana
-        ventana.setLayout(null);
-        ventana.setVisible(true);
+        new ejemploRadioButton();
     }
 
     @Override
@@ -91,6 +68,9 @@ public class ejemploRadioButton extends JFrame implements ChangeListener {
         }
         if (radio3.isSelected()) {
             setSize(1024,768);
+        }
+        if (checkbox.isSelected()){
+            System.out.println("CHECKBOX utilizado");
         }
 
     }

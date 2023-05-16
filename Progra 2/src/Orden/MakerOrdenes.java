@@ -9,13 +9,13 @@ public class MakerOrdenes { // Como el app del paquete
         // Prueba Ordenes
         Hamburguesa hamburguesaBase = new HamburguesaBase();
         System.out.println("Hamburguesa Base:");
-        System.out.println("Descripción: " + hamburguesaBase.getDescripcion());
+        System.out.println("Descripción): " + hamburguesaBase.getDescripcion());
         System.out.println("Precio: " + hamburguesaBase.getPrecio());
 
-        Hamburguesa hamburguesaTomate = new Tomate(new HamburguesaBase());
+        hamburguesaBase = new Tomate(new HamburguesaBase());
         System.out.println("\nHamburguesa Tomate:");
-        System.out.println("Descripción: " + hamburguesaTomate.getDescripcion());
-        System.out.println("Precio: " + hamburguesaTomate.getPrecio());
+        System.out.println("Descripción: " + hamburguesaBase.getDescripcion());
+        System.out.println("Precio: " + hamburguesaBase.getPrecio());
 
         Hamburguesa hamburguesaLechuga = new Lechuga(new HamburguesaBase());
         System.out.println("\nHamburguesa Lechuga:");
@@ -35,7 +35,7 @@ public class MakerOrdenes { // Como el app del paquete
 
         Orden orden1 = new Orden();
         orden1.agregarHamburguesa(hamburguesaBase);
-        orden1.agregarHamburguesa(hamburguesaTomate);
+        //orden1.agregarHamburguesa(hamburguesaBase);
         orden1.agregarHamburguesa(hamburguesaLechuga);
         orden1.agregarHamburguesa(hamburguesaLechugaTomate);
         orden1.agregarHamburguesa(hamburguesaConTodo);
