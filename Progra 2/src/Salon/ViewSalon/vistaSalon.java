@@ -55,7 +55,7 @@ public class vistaSalon implements ChangeListener{
             for (int j=0; j< FactoryMesas.cantMesas/2; j++){
                 JButton btn = new JButton();
                 btn.setSize(100, 100);
-                ImageIcon imagenIcono = new ImageIcon("Imagenes/mesas.png");
+                ImageIcon imagenIcono = new ImageIcon("Progra 2/src/Imagenes/mesas.png");
                 Image imagen = imagenIcono.getImage();
                 Image imagenEscalada = imagen.getScaledInstance(btn.getWidth(), btn.getHeight(), Image.SCALE_SMOOTH);
                 btn.setIcon(new ImageIcon(imagenEscalada));
