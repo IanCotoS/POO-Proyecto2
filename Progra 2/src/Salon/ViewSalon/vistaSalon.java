@@ -21,6 +21,7 @@ import ModelSalon.FactoryMesas;
 
 public class vistaSalon implements ChangeListener{
     private JButton[][] mesas;
+    private ButtonGroup grupoBotones;
     private JRadioButton hambuerguesa;//hamburguesa basica
     private JButton enviarOrden;
     private JButton factura; // realiza el pago de la cuenta
@@ -40,12 +41,13 @@ public class vistaSalon implements ChangeListener{
     }
 
     private void agregarComponentes(){
-        orden = new JLabel("Seleccione su tipo de orden: ");
-        orden.setBounds(FactoryMesas.cantMesas,1, 5, 15);
+        //orden = new JLabel("Seleccione su tipo de orden: ");
+        //orden.setBounds(FactoryMesas.cantMesas,1, 5, 15);
         pnlMesas = new JPanel();
         pnlMesas.setLayout(new GridLayout(FactoryMesas.cantMesas/2,FactoryMesas.cantMesas/2));
         agregarMesas();
-        ventana.add(orden);
+        agregarRadioButtons();
+        //ventana.add(orden);
         ventana.add(pnlMesas,BorderLayout.WEST);
     }
 
@@ -54,7 +56,7 @@ public class vistaSalon implements ChangeListener{
         for (int i=0; i< FactoryMesas.cantMesas/2; i++){
             for (int j=0; j< FactoryMesas.cantMesas/2; j++){
                 JButton btn = new JButton();
-                btn.setSize(100, 100);
+                btn.setSize(50, 50);
                 ImageIcon imagenIcono = new ImageIcon("Progra 2/src/Imagenes/mesas.png");
                 Image imagen = imagenIcono.getImage();
                 Image imagenEscalada = imagen.getScaledInstance(btn.getWidth(), btn.getHeight(), Image.SCALE_SMOOTH);
@@ -75,10 +77,12 @@ public class vistaSalon implements ChangeListener{
         System.out.println("Me has presionado");
     }
     private void agregarRadioButtons(){
+        grupoBotones=new ButtonGroup();
         hambuerguesa=new JRadioButton("Hamburguesa Basica");
-        hambuerguesa.setBounds(10,20,100,30);
+        hambuerguesa.setBounds(80,20,100,30);
         hambuerguesa.addChangeListener( this);
-        ventana.add(hambuerguesa,BorderLayout.NORTH);
+        grupoBotones.add(hambuerguesa);
+        ventana.add(hambuerguesa);
         agregarComponentes();    
     }
 
