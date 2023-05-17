@@ -22,7 +22,7 @@ public class Mesas {
     }
     //Getters and setters
     public String getInfo(){
-        return "Mesa: " + id_mesa + infoPedido();
+        return "Mesa: " + (id_mesa+1) + infoPedido();
     }
     public int getId_mesa() {
         return id_mesa;

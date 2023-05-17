@@ -1,6 +1,5 @@
 package ViewSalon;
 
-import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +14,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -26,13 +26,13 @@ import ModelSalon.FactoryMesas;
 import Orden.Orden;
 
 public class vistaSalon implements ChangeListener{
-    private JButton[][] mesas;
+    public ArrayList<JButton> mesas;
     private Hamburguesa hambur;
     private JRadioButton hambuerguesa;//hamburguesa basica
-    private JButton enviarOrden;
+    public   JButton enviarOrden;
     private JScrollPane jScrollPane3;
-    private JButton factura; // realiza el pago de la cuenta dentro de la tabla
-    private JTable facturar; // muestra todas las mesas y ordenes
+    public JButton factura; // realiza el pago de la cuenta dentro de la tabla
+    public JTable facturar; // muestra todas las mesas y ordenes
     private JFrame ventana;
     private JPanel pnlMesas;
     private JLabel extrasLabel;
@@ -41,8 +41,9 @@ public class vistaSalon implements ChangeListener{
     private JPanel pnlDerecho;
     private JCheckBox lechuga,tomate, cebolla, pepinillos,jalapeno,mayonesa,ketchup,queso;
     private JCheckBox huevoFrito, aguacate, tocino;
+    public DefaultTableModel model;
 
-    private Orden pedido;
+    public Orden pedido;
     
     public vistaSalon() {
         ventana = new JFrame("Salon");
@@ -70,6 +71,12 @@ public class vistaSalon implements ChangeListener{
             }
         });
         factura = new JButton("Pagar");
+        factura.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                realizarPago(factura);
+            }
+        });
         orden = new JLabel("Selecciona tu orden:");
         extrasLabel = new JLabel("Selecciona los extras:");
         hambuerguesa = new JRadioButton("Hamburguesa Basica");
@@ -94,13 +101,13 @@ public class vistaSalon implements ChangeListener{
 
         confiPnlDerecho();
         facturar = new JTable();
-        DefaultTableModel model = new DefaultTableModel( ){
+        model = new DefaultTableModel( ){
             //filas no editables
             public boolean isCellEditable (int row, int column) {
                 return false;
             }
         };
-        model.addColumn("Numero de mesa");
+        model.addColumn("Mesa");
         model.addColumn("Orden");
         facturar.setModel(model);
         jScrollPane3 = new JScrollPane();
@@ -154,7 +161,7 @@ public class vistaSalon implements ChangeListener{
                     .addGroup(jpDerechoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jpDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(extrasLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(extrasLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpDerechoLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(jpDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +237,7 @@ public class vistaSalon implements ChangeListener{
     }
 
     private void agregarMesas(){
-        mesas = new JButton[FactoryMesas.cantMesas/2][FactoryMesas.cantMesas/2];
+        mesas = new ArrayList<>();
         for (int i=0; i< FactoryMesas.cantMesas/2; i++){
             for (int j=0; j< FactoryMesas.cantMesas/2; j++){
                 JButton btn = new JButton();
@@ -246,7 +253,7 @@ public class vistaSalon implements ChangeListener{
                         Click(btn);
                     }
                 });
-                mesas[i][j]=btn;
+                mesas.add(btn);
                 pnlMesas.add(btn);
             }
         }
@@ -256,15 +263,12 @@ public class vistaSalon implements ChangeListener{
         pedido.agregarHamburguesa(hambur);
         System.out.println(pedido.getDescripcion());
     };
-    private void Click(JButton btn) {
-        System.out.println("Me has presionado");
-    }
-    public void enviar(JButton btn){
-        System.out.println("\nOrden enviada: \n"+ pedido.getDescripcion());
-        pedido = new Orden(); 
-        System.out.println("Nueva orden : "+ pedido.getDescripcion());
+    
+    public void Click(JButton btn) {}
 
-    }
+    public void enviar(JButton btn){}
+
+    public void realizarPago(JButton btn){}
     
 
     @Override

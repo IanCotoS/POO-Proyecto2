@@ -1,5 +1,6 @@
 package Orden;
 
+import java.lang.annotation.Retention;
 // Imports
 import java.util.ArrayList;
 import Comida.Hamburguesa.*;
@@ -27,17 +28,24 @@ public class Orden {
     }
 
     public String getDescripcion() {
-        String descripcion = "  Está listo: " + getListo() + 
+        String descripcion = "      Está listo: " + getListo() + 
         "\nHambuguesas: (" + hamburguesas.size() + " pedidos en total)";
         int cont = 1;
         for (Hamburguesa hamburguesa : hamburguesas) {
-            descripcion += "\n" + cont + ". " + hamburguesa.getDescripcion() + "\nPrecio: " + hamburguesa.getPrecio();
+            descripcion += "\n" + cont + ". " + hamburguesa.getDescripcion() + "\n     Precio: " + hamburguesa.getPrecio();
             cont++;
         }
         descripcion += "\nPrecio total: " + getPrecio();
         return descripcion;
     }
 
+    public String obtenerOrden(){
+        String descripcion = "";
+        for (Hamburguesa hamburguesa : hamburguesas) {
+            descripcion += "Hamburguesa "+hamburguesa.getDescripcion() + ",\n";
+        }
+        return descripcion.substring(0, descripcion.length() - 2);
+    }
     public double getPrecio() {
         return precio;
     }
