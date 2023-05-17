@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -17,29 +18,33 @@ import java.awt.event.ActionListener;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 
 import Comida.Hamburguesa.*;
 import Comida.Ingredientes.*;
 import ModelSalon.FactoryMesas;
+import Orden.Orden;
 
 public class vistaSalon implements ChangeListener{
     private JButton[][] mesas;
     private Hamburguesa hambur;
-    private ButtonGroup grupoBotones;
     private JRadioButton hambuerguesa;//hamburguesa basica
     private JButton enviarOrden;
+    private JScrollPane jScrollPane3;
     private JButton factura; // realiza el pago de la cuenta dentro de la tabla
     private JTable facturar; // muestra todas las mesas y ordenes
     private JFrame ventana;
     private JPanel pnlMesas;
     private JLabel extrasLabel;
     private JLabel orden;
+    private JButton agregarOrden;
     private JPanel pnlDerecho;
-    private JCheckBox pan, carne, lechuga,tomate, cebolla, pepinillos,jalapeño,mostaza,ketchup,queso;
+    private JCheckBox lechuga,tomate, cebolla, pepinillos,jalapeno,mayonesa,ketchup,queso;
     private JCheckBox huevoFrito, aguacate, tocino;
+
+    private Orden pedido;
     
     public vistaSalon() {
-        //hambur = new HamburguesaBase();
         ventana = new JFrame("Salon");
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         agregarComponentes();
@@ -49,11 +54,19 @@ public class vistaSalon implements ChangeListener{
     }
 
     private void agregarComponentes(){
+        pedido = new Orden();
         enviarOrden = new JButton("Enviar Orden");
         enviarOrden.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
                 enviar(enviarOrden);
+            }
+        });
+        agregarOrden = new JButton("Agregar Orden");
+        agregarOrden.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                agregarHamburguesa(agregarOrden);
             }
         });
         factura = new JButton("Pagar");
@@ -67,30 +80,50 @@ public class vistaSalon implements ChangeListener{
         pnlDerecho = new JPanel();
         pnlDerecho.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDerecho.add(orden);
-        pan = new JCheckBox("Pan"); carne=new JCheckBox("Carne"); lechuga= new JCheckBox("Lechuga");
-        tomate= new JCheckBox("Tomate"); cebolla=new JCheckBox("Cebolla"); pepinillos = new JCheckBox("Pepinillos");
-        jalapeño= new JCheckBox("Jalapeño"); mostaza= new JCheckBox("Mayonesa");ketchup = new JCheckBox("Ketchup");
-        queso = new JCheckBox("Queso"); tocino= new JCheckBox("Tocino"); huevoFrito = new JCheckBox("Huevo Frito");
-        aguacate = new JCheckBox("Aguacate");
+        lechuga= new JCheckBox("Lechuga"); tomate= new JCheckBox("Tomate"); cebolla=new JCheckBox("Cebolla"); 
+        pepinillos = new JCheckBox("Pepinillos"); jalapeno= new JCheckBox("Jalapeño"); 
+        mayonesa= new JCheckBox("Mayonesa"); ketchup = new JCheckBox("Ketchup");
+        queso = new JCheckBox("Queso"); tocino= new JCheckBox("Tocino"); 
+        huevoFrito = new JCheckBox("Huevo Frito");aguacate = new JCheckBox("Aguacate");
 
         //.addChangeListener de los ckeckbox;
-        pan.addChangeListener(this); carne.addChangeListener(this); lechuga.addChangeListener(this);
-        tomate.addChangeListener(this); cebolla.addChangeListener(this); pepinillos.addChangeListener(this);
-        jalapeño.addChangeListener(this); mostaza.addChangeListener(this); ketchup.addChangeListener(this);
-        queso.addChangeListener(this); tocino.addChangeListener(this); huevoFrito.addChangeListener(this);
-        aguacate.addChangeListener(this);
+        lechuga.addChangeListener(this); tomate.addChangeListener(this); cebolla.addChangeListener(this); 
+        pepinillos.addChangeListener(this); jalapeno.addChangeListener(this); mayonesa.addChangeListener(this); 
+        ketchup.addChangeListener(this); queso.addChangeListener(this); tocino.addChangeListener(this); 
+        huevoFrito.addChangeListener(this);aguacate.addChangeListener(this);
 
         confiPnlDerecho();
-        GroupLayout layout = new GroupLayout(ventana.getContentPane());
+        facturar = new JTable();
+        DefaultTableModel model = new DefaultTableModel( ){
+            //filas no editables
+            public boolean isCellEditable (int row, int column) {
+                return false;
+            }
+        };
+        model.addColumn("Numero de mesa");
+        model.addColumn("Orden");
+        facturar.setModel(model);
+        jScrollPane3 = new JScrollPane();
+        jScrollPane3.setViewportView(facturar);
+
+        GroupLayout layout = new javax.swing.GroupLayout(ventana.getContentPane());
         ventana.getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlMesas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pnlDerecho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addGap(28, 28, 28)
+                        .addComponent(factura, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlMesas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pnlDerecho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,9 +132,16 @@ public class vistaSalon implements ChangeListener{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlMesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlDerecho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(factura)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
-        
     }
 
     private void confiPnlDerecho(){
@@ -119,7 +159,7 @@ public class vistaSalon implements ChangeListener{
                                 .addGap(6, 6, 6)
                                 .addGroup(jpDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tomate)
-                                    .addComponent(carne)
+                                    .addComponent(jalapeno)
                                     .addComponent(queso))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jpDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,24 +167,24 @@ public class vistaSalon implements ChangeListener{
                                         .addComponent(tocino)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(huevoFrito)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(aguacate))
+                                        .addGap(18, 18, 18))
                                     .addGroup(jpDerechoLayout.createSequentialGroup()
                                         .addComponent(cebolla)
                                         .addGap(20, 20, 20)
                                         .addComponent(lechuga)
                                         .addGap(18, 18, 18)
-                                        .addComponent(pan))
+                                        .addComponent(aguacate))
                                     .addGroup(jpDerechoLayout.createSequentialGroup()
                                         .addComponent(pepinillos)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(mostaza)
+                                        .addComponent(mayonesa)
                                         .addGap(18, 18, 18)
                                         .addComponent(ketchup))
                                     .addGroup(jpDerechoLayout.createSequentialGroup()
                                         .addGap(21, 21, 21)
-                                        .addComponent(jalapeño)
-                                        .addComponent(enviarOrden))))))
+                                        .addComponent(enviarOrden)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(agregarOrden))))))
                     .addGroup(jpDerechoLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(hambuerguesa))
@@ -167,12 +207,12 @@ public class vistaSalon implements ChangeListener{
                     .addComponent(tomate)
                     .addComponent(lechuga)
                     .addComponent(cebolla)
-                    .addComponent(pan))
+                    .addComponent(aguacate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(carne)
+                    .addComponent(jalapeno)
                     .addComponent(pepinillos)
-                    .addComponent(mostaza)
+                    .addComponent(mayonesa)
                     .addComponent(ketchup))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -181,10 +221,11 @@ public class vistaSalon implements ChangeListener{
                     .addComponent(huevoFrito)
                     .addComponent(aguacate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jalapeño)
                 .addGap(29, 29, 29)
-                .addComponent(enviarOrden)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(jpDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enviarOrden)
+                    .addComponent(agregarOrden))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }
 
@@ -210,9 +251,21 @@ public class vistaSalon implements ChangeListener{
             }
         }
     }
+    
+    private void agregarHamburguesa(JButton btn){
+        pedido.agregarHamburguesa(hambur);
+        System.out.println(pedido.getDescripcion());
+    };
     private void Click(JButton btn) {
         System.out.println("Me has presionado");
     }
+    public void enviar(JButton btn){
+        System.out.println("\nOrden enviada: \n"+ pedido.getDescripcion());
+        pedido = new Orden(); 
+        System.out.println("Nueva orden : "+ pedido.getDescripcion());
+
+    }
+    
 
     @Override
     public void stateChanged(ChangeEvent e) {
@@ -220,44 +273,32 @@ public class vistaSalon implements ChangeListener{
             hambur = new HamburguesaBase();
         }if (tomate.isSelected()){
             hambur = new Tomate(new HamburguesaBase());
-            System.out.println("hambur tomate: "+ hambur.getDescripcion());
-
         }if (cebolla.isSelected()){
-            
+            hambur = new Cebolla(hambur);
         }if (lechuga.isSelected()){
-            
-        }if (carne.isSelected()){
-            
+            hambur = new Lechuga(hambur);
         }if (pepinillos.isSelected()){
-            
-        }if (mostaza.isSelected()){
-            
+            hambur = new Pepinillos(hambur);
+        }if (mayonesa.isSelected()){
+            hambur = new Mayonesa(hambur);
         }if (queso.isSelected()){
-            
-        }if (pan.isSelected()){
-            
+           hambur = new Queso(hambur); 
         }if (ketchup.isSelected()){
-            
+            hambur = new Ketchup(hambur);
         }if (tocino.isSelected()){
-            
+            hambur = new Tocino(hambur);
         }if (huevoFrito.isSelected()){
-            
+            hambur = new HuevoFrito(hambur);
         }if (aguacate.isSelected()){
-            
-        }if (jalapeño.isSelected()){
-            
+            hambur = new Aguacate(hambur);
+        }if (jalapeno.isSelected()){
+            hambur = new Jalapeno(hambur);
         }
     }
-
-    public void enviar(JButton btn){
-        System.out.println("Hamburguesa: \n"+ hambur.getDescripcion());
-    }
-    
 
     
     public static void main(String[] args) {
         new vistaSalon();
     }
-
     
 }
