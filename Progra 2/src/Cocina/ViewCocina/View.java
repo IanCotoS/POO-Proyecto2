@@ -1,4 +1,4 @@
-package ViewCocina;
+package Cocina.ViewCocina;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +21,6 @@ public class View {
         frmCocina= new JFrame("Cocina");
         frmCocina.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCocina.setSize(1121, 453);
-		
 		iniciarComponentes();
 		frmCocina.pack();
         frmCocina.setVisible(true);
