@@ -1,45 +1,69 @@
 package ModelSalon;
-import java.util.ArrayList;
-
 import Orden.Orden;
 
 public class Salon {
-    ArrayList<Mesas> mesas;
+    private Mesas[][] mesas;
 
     public Salon() {
         this.mesas = FactoryMesas.getMesas();
     }
 
-    public void agregarOrden(int id_mesa, Orden orden){
-        this.mesas.get(id_mesa).agregarOrden(orden);
+    public void agregarOrden(int fila, int colunma, Orden orden){
+        this.mesas[fila][colunma].agregarOrden(orden);
     }
 
-    public double obtenerCuenta(int id_mesa){
-        return this.mesas.get(id_mesa).pagarCuenta();
+    public double obtenerCuenta(int fila, int colunma){
+        return this.mesas[fila][colunma].pagarCuenta();
     }
 
-    public String obtenerInfoMesa(int id_mesa){
-        return this.mesas.get(id_mesa).getInfo();
+    public String obtenerInfoMesa(int fila, int colunma){
+        return this.mesas[fila][colunma].getInfo();
     }
-    public String obtenerInfoOrden(int id_mesa){
-        return "Mesa "+ (id_mesa+1)+"\n"+this.mesas.get(id_mesa).getOrden().obtenerOrden();
+    public String obtenerInfoOrden(int fila, int colunma){
+        return "Mesa "+ (mesas[fila][colunma].getId_mesa()+1)+"\n"+this.mesas[fila][colunma].getOrden().obtenerOrden();
     }
     public Mesas obtenerMesaLibre(){
-        for (Mesas m: mesas){
-            if (!m.isEstado()){
-                return m;
+        for (Mesas[] fila: mesas){
+            for (Mesas m : fila){
+                if (!m.isEstado()){
+                    return m;
+                }
             }
         }
         return null;
     }
 
-    public int obtenerMesaOcupada(){
-        for (Mesas m: mesas){
-            if (m.isEstado()){
-                return m.getId_mesa();
+    public boolean estadoMesa(int fila, int colunma){
+        return this.mesas[fila][colunma].isEstado();
+    }
+
+    public void cambiarEstadOrden(int fila, int colunma){
+        this.mesas[fila][colunma].cambiarEstadoOrden();
+    }
+    public int[] obtenerMesaOcupada(){
+        for (Mesas[] fila: mesas){
+            for (Mesas m : fila){
+                if (m.isEstado()){
+                    return m.getPosicion();
+                }
             }
         }
-        return -1;
+        return null;
+    }
+
+    public int[] obtenerMesa(int id_mesa){
+        for (Mesas[] fila: mesas){
+            for (Mesas m : fila){
+                if (m.getId_mesa() == id_mesa){
+                    return m.getPosicion();
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean estadoOrden(int fila, int col){
+        return this.mesas[fila][col].getOrden().getListo();
     }
     
 }

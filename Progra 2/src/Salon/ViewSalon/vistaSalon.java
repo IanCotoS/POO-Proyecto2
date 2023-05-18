@@ -26,7 +26,7 @@ import ModelSalon.FactoryMesas;
 import Orden.Orden;
 
 public class vistaSalon implements ChangeListener{
-    public ArrayList<JButton> mesas;
+    public JButton[][] mesas;
     private Hamburguesa hambur;
     private JRadioButton hambuerguesa;//hamburguesa basica
     public   JButton enviarOrden;
@@ -109,6 +109,7 @@ public class vistaSalon implements ChangeListener{
         };
         model.addColumn("Mesa");
         model.addColumn("Orden");
+        model.addColumn("Estado");
         facturar.setModel(model);
         jScrollPane3 = new JScrollPane();
         jScrollPane3.setViewportView(facturar);
@@ -237,7 +238,7 @@ public class vistaSalon implements ChangeListener{
     }
 
     private void agregarMesas(){
-        mesas = new ArrayList<>();
+        mesas = new JButton[FactoryMesas.cantMesas/2][FactoryMesas.cantMesas/2];
         for (int i=0; i< FactoryMesas.cantMesas/2; i++){
             for (int j=0; j< FactoryMesas.cantMesas/2; j++){
                 JButton btn = new JButton();
@@ -253,7 +254,7 @@ public class vistaSalon implements ChangeListener{
                         Click(btn);
                     }
                 });
-                mesas.add(btn);
+                mesas[i][j] = btn;
                 pnlMesas.add(btn);
             }
         }
@@ -300,6 +301,16 @@ public class vistaSalon implements ChangeListener{
         }
     }
 
+    public int[] posicionMesa(JButton btn){
+        for (int i=0; i< FactoryMesas.cantMesas/2; i++){
+            for (int j=0; j< FactoryMesas.cantMesas/2; j++){
+                if (mesas[i][j] == btn){
+                    return new int[]{i,j};
+                }
+            }
+        }
+        return null; 
+    }
     
     public static void main(String[] args) {
         new vistaSalon();

@@ -35,14 +35,15 @@ public class server implements Runnable{
     @Override
     public void run() {
         try{
-            server = new ServerSocket(5555);
+            server = new ServerSocket(1234);
             client = server.accept();
             while (true){
                 input = new ObjectInputStream(client.getInputStream());
                 orden = (Orden)input.readObject();
                 Mesas mesa = buscarMesa();
                 if (mesa!= null){
-                    s.agregarOrden(mesa.getId_mesa(), orden);
+                    int[] posicionMesa = mesa.getPosicion();
+                    s.agregarOrden(posicionMesa[0], posicionMesa[1], orden);
                 }else{
                     String mens = "No hay mesas disponibles en el salón.";
                     JOptionPane.showMessageDialog(null, mens, "Información", JOptionPane.INFORMATION_MESSAGE);

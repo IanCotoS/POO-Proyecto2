@@ -10,11 +10,12 @@ import javax.swing.JOptionPane;
 
 import ModelSalon.*;
 import Orden.Orden;
+import ServerClient.ClienteCocina;
 import ViewSalon.*;
 
 public class controlerSalon {
     public Salon modelSalon;
-    private vistaSalon view;
+    public vistaSalon view;
     private Pattern patron = Pattern.compile("\\d+"); // Expresión regular para encontrar dígitos
 
     public controlerSalon() {
@@ -30,14 +31,16 @@ public class controlerSalon {
             public void actionPerformed(ActionEvent e) {
                 pagarPedido(view.factura);
         }});
-        for (JButton mesa : view.mesas){
-            mesa.addActionListener(new ActionListener() 
-            { 
+        for (JButton[] mesa : view.mesas){
+            for (JButton boton : mesa){
+                boton.addActionListener(new ActionListener() 
+                { 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    clickMesa(mesa);
+                    clickMesa(boton);
                 }
             });
+            }
         }                       
     }
 
@@ -48,13 +51,20 @@ public class controlerSalon {
     public void pagarPedido(JButton btn){
         int selectedRow=view.facturar.getSelectedRow();
         if (selectedRow!=-1){
+            int[] posicionMesa = modelSalon.obtenerMesa(selectedRow);
+            if (!modelSalon.estadoOrden(posicionMesa[0], posicionMesa[1])){
+                String men = "La orden de esta mesa no esta lista.";
+                JOptionPane.showMessageDialog(null, men , "Información", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
             String value = view.facturar.getValueAt(selectedRow, 0).toString();
             Matcher matcher= patron.matcher(value);
             if (matcher.find()) {
                 String numeroString = matcher.group(); // Obtener la coincidencia encontrada
                 int numero = Integer.parseInt(numeroString);
-                JOptionPane.showMessageDialog(null, modelSalon.obtenerInfoOrden(numero-1), "Factura", JOptionPane.INFORMATION_MESSAGE);
-                String mens = "Has pagado : " +modelSalon.obtenerCuenta(numero-1)+ " de la mesa "+(numero);
+                String resultado = modelSalon.obtenerInfoOrden(posicionMesa[0], posicionMesa[1]);
+                JOptionPane.showMessageDialog(null, resultado, "Factura", JOptionPane.INFORMATION_MESSAGE);
+                String mens = "Has pagado: " +modelSalon.obtenerCuenta(posicionMesa[0], posicionMesa[1])+ " de la mesa "+(numero);
                 JOptionPane.showMessageDialog(null, mens, "Información", JOptionPane.INFORMATION_MESSAGE);
                 view.model.removeRow(selectedRow);
             }
@@ -64,20 +74,27 @@ public class controlerSalon {
         }
     }
     public void clickMesa(JButton btn){
-        System.out.println("A presionado la mesa: "+ (view.mesas.indexOf(btn)));
-        int numero = (view.mesas.indexOf(btn));
-        JOptionPane.showMessageDialog(null, modelSalon.obtenerInfoMesa(numero), "Información", JOptionPane.INFORMATION_MESSAGE);
+        int[] posicionMesa = view.posicionMesa(btn);
+        if (modelSalon.estadoMesa(posicionMesa[0], posicionMesa[1])){
+            JOptionPane.showMessageDialog(null, modelSalon.obtenerInfoMesa(posicionMesa[0], posicionMesa[1]), "Información", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Mesa Disponible", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
     }
     public void enviarPedido(JButton btn){
         Orden orden = view.pedido;
-        System.out.println("\nOrden en el controler: " + orden.getDescripcion());
-        int numM = modelSalon.obtenerMesaLibre().getId_mesa();
-        modelSalon.agregarOrden(numM, orden);
-        this.view.model.addRow(new Object[]{"mesa "+(numM+1),this.view.pedido.obtenerOrden()});
+        Mesas m = modelSalon.obtenerMesaLibre();
+        int[] posicionMesa = m.getPosicion();
+        int numM = m.getId_mesa();
+        modelSalon.agregarOrden(posicionMesa[0], posicionMesa[1], orden);
+        this.view.model.addRow(new Object[]{"mesa "+(numM+1),this.view.pedido.obtenerOrden(), orden.getListo()});
         this.view.pedido = new Orden();
-
+        ClienteCocina sClienteCocina = new ClienteCocina(numM, 1234);// conexión al servidor de la cocina
     }
     
-    
+    public int[] obtenerMesa(int id_mesa){
+        return modelSalon.obtenerMesa(id_mesa);
+    }
 
 }

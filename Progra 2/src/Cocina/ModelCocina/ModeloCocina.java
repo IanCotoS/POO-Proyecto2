@@ -7,9 +7,10 @@ public class ModeloCocina {
     // [numero mesa, estado] : estado( true=1 , false=0)
 
     public ModeloCocina() {
+        this.ordenes = new ArrayList<int[]>();
     }
 
-    private void eliminarOrden(int[] arr){
+    public void eliminarOrden(int[] arr){
         ordenes.remove(arr);
     }
     

@@ -7,8 +7,11 @@ public class Mesas {
     private int id_mesa;
     private boolean estado; // true: ocupado
     private Orden pedido;
-    public Mesas(int id_mesa) {
+    private int fila,colunma; 
+    public Mesas(int id_mesa, int x, int j) {
         this.id_mesa = id_mesa;
+        this.fila = x;
+        this.colunma = j;
         this.estado = false;
     }
 
@@ -19,6 +22,9 @@ public class Mesas {
     public double pagarCuenta(){
         setEstado(false);
         return pedido.getPrecio();
+    }
+    public void cambiarEstadoOrden(){
+        pedido.estaListo();
     }
     //Getters and setters
     public String getInfo(){
@@ -44,5 +50,10 @@ public class Mesas {
     public void setEstado(boolean estado) {//desocupar mesa
         this.estado = estado;
     }
+
+    public int[] getPosicion() {
+        return new int[]{fila, colunma};
+    }
+    
     
 }
