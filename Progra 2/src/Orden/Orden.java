@@ -1,11 +1,11 @@
 package Orden;
 
-import java.lang.annotation.Retention;
+import java.io.Serializable;
 // Imports
 import java.util.ArrayList;
 import Comida.Hamburguesa.*;
 
-public class Orden {
+public class Orden implements Serializable{
     
     // Atributos
     ArrayList<Hamburguesa> hamburguesas;
@@ -44,7 +44,7 @@ public class Orden {
         for (Hamburguesa hamburguesa : hamburguesas) {
             descripcion += "Hamburguesa "+hamburguesa.getDescripcion() + ",\n";
         }
-        return descripcion.substring(0, descripcion.length() - 2);
+        return descripcion.substring(0, descripcion.length() - 2)+".\n Precio: "+getPrecio();
     }
     public double getPrecio() {
         return precio;

@@ -11,7 +11,7 @@ public class Jalapeno extends IngredienteDecorador{
 
     @Override
     public String getDescripcion() {
-        return tempHamburguesa.getDescripcion() + " + Jalapeno";
+        return tempHamburguesa.getDescripcion() + " + Jalapeño";
     }
 
     @Override

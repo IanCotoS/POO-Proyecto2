@@ -3,10 +3,10 @@ import java.util.ArrayList;
 
 import Orden.Orden;
 
-public class salon {
+public class Salon {
     ArrayList<Mesas> mesas;
 
-    public salon() {
+    public Salon() {
         this.mesas = FactoryMesas.getMesas();
     }
 
@@ -20,6 +20,9 @@ public class salon {
 
     public String obtenerInfoMesa(int id_mesa){
         return this.mesas.get(id_mesa).getInfo();
+    }
+    public String obtenerInfoOrden(int id_mesa){
+        return "Mesa "+ (id_mesa+1)+"\n"+this.mesas.get(id_mesa).getOrden().obtenerOrden();
     }
     public Mesas obtenerMesaLibre(){
         for (Mesas m: mesas){

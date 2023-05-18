@@ -1,6 +1,8 @@
 package Comida.Hamburguesa;
 
-public interface Hamburguesa {
+import java.io.Serializable;
+
+public interface Hamburguesa extends Serializable{
 
     public String getDescripcion();
     

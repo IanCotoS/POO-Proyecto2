@@ -13,12 +13,12 @@ import Orden.Orden;
 import ViewSalon.*;
 
 public class controlerSalon {
-    private salon modelSalon;
+    public Salon modelSalon;
     private vistaSalon view;
     private Pattern patron = Pattern.compile("\\d+"); // Expresión regular para encontrar dígitos
 
     public controlerSalon() {
-        modelSalon = new salon();
+        modelSalon = new Salon();
         view = new vistaSalon();
         this.view.enviarOrden.addActionListener(new ActionListener() { 
             @Override
@@ -53,9 +53,10 @@ public class controlerSalon {
             if (matcher.find()) {
                 String numeroString = matcher.group(); // Obtener la coincidencia encontrada
                 int numero = Integer.parseInt(numeroString);
-                JOptionPane.showMessageDialog(null, modelSalon.obtenerInfoMesa(numero-1), "Información", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, modelSalon.obtenerInfoOrden(numero-1), "Factura", JOptionPane.INFORMATION_MESSAGE);
                 String mens = "Has pagado : " +modelSalon.obtenerCuenta(numero-1)+ " de la mesa "+(numero);
                 JOptionPane.showMessageDialog(null, mens, "Información", JOptionPane.INFORMATION_MESSAGE);
+                view.model.removeRow(selectedRow);
             }
         }else{
             String mess = "Debe presionar una de las filas.";

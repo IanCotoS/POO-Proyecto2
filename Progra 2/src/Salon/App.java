@@ -19,7 +19,7 @@ public class App {
         orden1.agregarHamburguesa(hamburguesaBase);
         orden1.agregarHamburguesa(hamburguesaTomate);
 
-        salon s = new salon();
+        Salon s = new Salon();
         Mesas mesa = s.obtenerMesaLibre();
         s.agregarOrden(mesa.getId_mesa(), orden1);
         System.out.println("\nOrden agregada a la mesa");
