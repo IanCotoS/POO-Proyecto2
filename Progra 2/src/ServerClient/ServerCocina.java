@@ -5,13 +5,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import Cocina.ControlerCocina.ControladorCocina;
+import Orden.Orden;
 
 public class ServerCocina implements Runnable {
-    private int mesa;
     private ControladorCocina controladorCocina;
+    private Object[] datosOrden;
 
-    Socket client; // simulacion
-    ServerSocket server; //salon
+    Socket client; //salon
+    ServerSocket server; //cocina
     ObjectInputStream input; // recibe la orden 
 
     public ServerCocina(ControladorCocina cookCocina){
@@ -28,9 +29,10 @@ public class ServerCocina implements Runnable {
             while (true){
                 client = server.accept();
                 input = new ObjectInputStream(client.getInputStream());
-                mesa = (int) input.readObject();
-                controladorCocina.cocina.agregarOrden(new int[]{mesa, 0});
-                controladorCocina.vistaCocina.model.addRow(new Object[]{"Mesa "+(mesa+1), "En espera"});
+                datosOrden = (Object[]) input.readObject();  //[Num mesa, Orden]
+                controladorCocina.cocina.agregarOrden(datosOrden);
+                Orden orden = (Orden)datosOrden[1];
+                controladorCocina.vistaCocina.model.addRow(new Object[]{"Mesa "+(((int)datosOrden[0])+1),orden.obtenerOrden(), "En espera"});
                 //input.close();
                 //client.close();
             }

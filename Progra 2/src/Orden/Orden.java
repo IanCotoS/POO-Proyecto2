@@ -8,9 +8,9 @@ import Comida.Hamburguesa.*;
 public class Orden implements Serializable{
     
     // Atributos
-    ArrayList<Hamburguesa> hamburguesas;
-    boolean listo;
-    double precio;
+    public ArrayList<Hamburguesa> hamburguesas;
+    private boolean listo;
+    private double precio;
 
     // Constructor
     public Orden() {

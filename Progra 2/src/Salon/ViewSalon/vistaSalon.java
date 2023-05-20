@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -14,8 +15,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +28,7 @@ public class vistaSalon implements ChangeListener{
     public JButton[][] mesas;
     private Hamburguesa hambur;
     private JRadioButton hambuerguesa;//hamburguesa basica
-    public   JButton enviarOrden;
+    public  JButton enviarOrden;
     private JScrollPane jScrollPane3;
     public JButton factura; // realiza el pago de la cuenta dentro de la tabla
     public JTable facturar; // muestra todas las mesas y ordenes
@@ -261,8 +260,14 @@ public class vistaSalon implements ChangeListener{
     }
     
     private void agregarHamburguesa(JButton btn){
-        pedido.agregarHamburguesa(hambur);
-        System.out.println(pedido.getDescripcion());
+        if (hambur == null ){ 
+            String mens = "Debes seleccionar un tipo de orden y sus ingredientes extras.";
+            JOptionPane.showMessageDialog(null,mens, "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }else{
+            pedido.agregarHamburguesa(hambur);
+            System.out.println(pedido.getDescripcion());
+        }
     };
     
     public void Click(JButton btn) {}
@@ -277,7 +282,7 @@ public class vistaSalon implements ChangeListener{
         if (hambuerguesa.isSelected()){
             hambur = new HamburguesaBase();
         }if (tomate.isSelected()){
-            hambur = new Tomate(new HamburguesaBase());
+            hambur = new Tomate(hambur);
         }if (cebolla.isSelected()){
             hambur = new Cebolla(hambur);
         }if (lechuga.isSelected()){

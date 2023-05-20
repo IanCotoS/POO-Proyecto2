@@ -37,9 +37,13 @@ public class Salon {
         return this.mesas[fila][colunma].isEstado();
     }
 
-    public void cambiarEstadOrden(int fila, int colunma){
-        this.mesas[fila][colunma].cambiarEstadoOrden();
+    public void cambiarEstadOrden(int id){
+        int[] m = obtenerMesa(id);
+        if (m != null){
+            this.mesas[m[0]][m[1]].cambiarEstadoOrden();
+        }
     }
+
     public int[] obtenerMesaOcupada(){
         for (Mesas[] fila: mesas){
             for (Mesas m : fila){

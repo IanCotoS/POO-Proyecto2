@@ -38,6 +38,7 @@ public class View {
         completarOrden.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         model = new DefaultTableModel();
         model.addColumn("Mesa");
+        model.addColumn("Orden");
         model.addColumn("Estado de la Orden");
         ordenes = new JTable();
         ordenes.setModel(model);

@@ -11,12 +11,13 @@ public class ClienteCocina {
      */
     private Socket client;// cocina
     private ObjectOutputStream output;
-    private int mensaje;
+    //private int mensaje;
     private int port;
+    private Object[] mens;
     
 
-    public ClienteCocina(int datos, int puerto){
-        this.mensaje = datos;
+    public ClienteCocina(Object[] datos, int puerto){
+        this.mens = datos;
         this.port = puerto;
         conectar();
     }
@@ -25,7 +26,7 @@ public class ClienteCocina {
         try{
             client = new Socket("localhost", port);
             output = new ObjectOutputStream(client.getOutputStream());
-            output.writeObject(mensaje);
+            output.writeObject(mens);
             //output.close();
             //client.close();
         }

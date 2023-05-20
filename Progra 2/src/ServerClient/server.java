@@ -35,7 +35,7 @@ public class server implements Runnable{
     @Override
     public void run() {
         try{
-            server = new ServerSocket(1234);
+            server = new ServerSocket(9999);
             client = server.accept();
             while (true){
                 input = new ObjectInputStream(client.getInputStream());
@@ -49,7 +49,6 @@ public class server implements Runnable{
                     JOptionPane.showMessageDialog(null, mens, "Información", JOptionPane.INFORMATION_MESSAGE);
                 }
                 input.close();
-                //client.close();
             }
         }
         catch (Exception e){
