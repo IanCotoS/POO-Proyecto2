@@ -25,22 +25,22 @@ import ModelSalon.FactoryMesas;
 import Orden.Orden;
 
 public class vistaSalon implements ChangeListener{
-    public JButton[][] mesas;
-    private Hamburguesa hambur;
+    public JButton[][] mesas; 
+    private Hamburguesa hambur; 
     private JRadioButton hambuerguesa;//hamburguesa basica
-    public  JButton enviarOrden;
+    public  JButton enviarOrden; 
     private JScrollPane jScrollPane3;
     public JButton factura; // realiza el pago de la cuenta dentro de la tabla
     public JTable facturar; // muestra todas las mesas y ordenes
-    private JFrame ventana;
+    private JFrame ventana; 
     private JPanel pnlMesas;
     private JLabel extrasLabel;
     private JLabel orden;
     private JButton agregarOrden;
     private JPanel pnlDerecho;
     private JCheckBox lechuga,tomate, cebolla, pepinillos,jalapeno,mayonesa,ketchup,queso;
-    private JCheckBox huevoFrito, aguacate, tocino;
-    public DefaultTableModel model;
+    private JCheckBox huevoFrito, aguacate, tocino; 
+    public DefaultTableModel model; 
 
     public Orden pedido;
     
@@ -56,12 +56,6 @@ public class vistaSalon implements ChangeListener{
     private void agregarComponentes(){
         pedido = new Orden();
         enviarOrden = new JButton("Enviar Orden");
-        enviarOrden.addActionListener(new ActionListener() { 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                enviar(enviarOrden);
-            }
-        });
         agregarOrden = new JButton("Agregar Orden");
         agregarOrden.addActionListener(new ActionListener() { 
             @Override
@@ -70,12 +64,6 @@ public class vistaSalon implements ChangeListener{
             }
         });
         factura = new JButton("Pagar");
-        factura.addActionListener(new ActionListener() { 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                realizarPago(factura);
-            }
-        });
         orden = new JLabel("Selecciona tu orden:");
         extrasLabel = new JLabel("Selecciona los extras:");
         hambuerguesa = new JRadioButton("Hamburguesa Basica");
@@ -246,13 +234,6 @@ public class vistaSalon implements ChangeListener{
                 Image imagen = imagenIcono.getImage();
                 Image imagenEscalada = imagen.getScaledInstance(btn.getWidth(), btn.getHeight(), Image.SCALE_SMOOTH);
                 btn.setIcon(new ImageIcon(imagenEscalada));
-                btn.addActionListener(new ActionListener() 
-                { 
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        Click(btn);
-                    }
-                });
                 mesas[i][j] = btn;
                 pnlMesas.add(btn);
             }
@@ -270,13 +251,6 @@ public class vistaSalon implements ChangeListener{
         }
     };
     
-    public void Click(JButton btn) {}
-
-    public void enviar(JButton btn){}
-
-    public void realizarPago(JButton btn){}
-    
-
     @Override
     public void stateChanged(ChangeEvent e) {
         if (hambuerguesa.isSelected()){

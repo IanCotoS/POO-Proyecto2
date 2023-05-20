@@ -19,9 +19,11 @@ public class Salon {
     public String obtenerInfoMesa(int fila, int colunma){
         return this.mesas[fila][colunma].getInfo();
     }
+    
     public String obtenerInfoOrden(int fila, int colunma){
         return "Mesa "+ (mesas[fila][colunma].getId_mesa()+1)+"\n"+this.mesas[fila][colunma].getOrden().obtenerOrden();
     }
+    
     public Mesas obtenerMesaLibre(){
         for (Mesas[] fila: mesas){
             for (Mesas m : fila){

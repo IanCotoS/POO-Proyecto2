@@ -2,8 +2,6 @@ package Cocina.ModelCocina;
 
 import java.util.ArrayList;
 
-import Orden.Orden;
-
 public class ModeloCocina {
     public ArrayList<Object[]> ordenes;
     // [numero mesa, orden] 

@@ -33,16 +33,9 @@ public class ControladorCocina {
         }
         int selectedRow= vistaCocina.ordenes.getSelectedRow();
         if (selectedRow!=-1){
-            String value = vistaCocina.ordenes.getValueAt(selectedRow, 0).toString();
-            Matcher matcher= patron.matcher(value);
-            if (matcher.find()) {
-                //String numeroString = matcher.group(); // Obtener la coincidencia encontrada
-                //int numero = Integer.parseInt(numeroString);
-                vistaCocina.model.removeRow(selectedRow);
-                ClienteCocina client = new ClienteCocina(new Object[]{this.cocina.obtenerMesa(selectedRow)}, 5555);
-                cocina.eliminarOrden(selectedRow);
-            }
-            
+            vistaCocina.model.removeRow(selectedRow);
+            ClienteCocina client = new ClienteCocina(new Object[]{this.cocina.obtenerMesa(selectedRow)}, 5555);
+            cocina.eliminarOrden(selectedRow);            
         }else{
             String mess = "Debe presionar una de las filas.";
             JOptionPane.showMessageDialog(null, mess, "Información", JOptionPane.INFORMATION_MESSAGE);

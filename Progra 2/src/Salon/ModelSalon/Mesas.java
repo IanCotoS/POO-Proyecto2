@@ -23,13 +23,16 @@ public class Mesas {
         setEstado(false);
         return pedido.getPrecio();
     }
+    
     public void cambiarEstadoOrden(){
         pedido.estaListo();
     }
+    
     //Getters and setters
     public String getInfo(){
         return "Mesa: " + (id_mesa+1) + infoPedido();
     }
+    
     public int getId_mesa() {
         return id_mesa;
     }
@@ -54,6 +57,5 @@ public class Mesas {
     public int[] getPosicion() {
         return new int[]{fila, colunma};
     }
-    
     
 }
