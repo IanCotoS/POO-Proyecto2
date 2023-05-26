@@ -15,35 +15,35 @@ public class server implements Runnable{
      * servidor para realizar conexión con la simulación
      */
     private Orden orden;
-    private Salon s;
+    private Salon salon;
 
-    Socket client; // simulacion
-    ServerSocket server; //salon
-    ObjectInputStream input; // recibe la orden 
+    private Socket client; // simulacion
+    private ServerSocket server; //salon
+    private ObjectInputStream input; // recibe la orden 
 
     public server(Salon salon){
         Thread hiloSalon = new Thread(this);
-        this.s= salon;
+        this.salon= salon;
         hiloSalon.start();
 
     }
 
     private Mesas buscarMesa(){
-        return s.obtenerMesaLibre();
+        return salon.obtenerMesaLibre();
     }
 
     @Override
     public void run() {
         try{
             server = new ServerSocket(9999);
-            client = server.accept();
             while (true){
+                client = server.accept();
                 input = new ObjectInputStream(client.getInputStream());
                 orden = (Orden)input.readObject();
                 Mesas mesa = buscarMesa();
                 if (mesa!= null){
                     int[] posicionMesa = mesa.getPosicion();
-                    s.agregarOrden(posicionMesa[0], posicionMesa[1], orden);
+                    salon.agregarOrden(posicionMesa[0], posicionMesa[1], orden);
                 }else{
                     String mens = "No hay mesas disponibles en el salón.";
                     JOptionPane.showMessageDialog(null, mens, "Información", JOptionPane.INFORMATION_MESSAGE);

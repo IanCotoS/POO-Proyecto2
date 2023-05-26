@@ -15,9 +15,9 @@ public class ServerSalon implements Runnable{
      */
     private Object[] mesa; // numero de mesa
     private controlerSalon salon;
-    Socket client; 
-    ServerSocket server; 
-    ObjectInputStream input; // recibe la orden 
+    private Socket client; 
+    private ServerSocket server; 
+    private ObjectInputStream input; // recibe la orden 
 
     public ServerSalon(controlerSalon s){
         Thread hiloSalon = new Thread(this);
@@ -48,11 +48,6 @@ public class ServerSalon implements Runnable{
         }
     }
 
-    /* 
-     * si se envia el valor de la posicion0 de cada objeto de la lista de ordenes en 
-     * la cocina, se puede cambiar el metodo a uno que busque en la primera columna 
-     * el valor de cada fila que coincida con el valor que envia la cocina 
-     */
     public int obtenerDatosTabla(int id){
         Pattern patron = Pattern.compile("\\d+");
         int filas = salon.view.facturar.getRowCount();

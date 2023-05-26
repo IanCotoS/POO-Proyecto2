@@ -55,10 +55,6 @@ public class Orden implements Serializable{
         this.listo = true;
     }
 
-    public void calcularPrecio(Hamburguesa newHamburguesa) {
-        this.precio = newHamburguesa.getPrecio();
-    }
-
     public void agregarCosto(Hamburguesa newHamburguesa) {
         this.precio += newHamburguesa.getPrecio();
     }

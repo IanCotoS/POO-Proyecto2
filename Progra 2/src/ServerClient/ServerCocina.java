@@ -11,9 +11,9 @@ public class ServerCocina implements Runnable {
     private ControladorCocina controladorCocina;
     private Object[] datosOrden;
 
-    Socket client; //salon
-    ServerSocket server; //cocina
-    ObjectInputStream input; // recibe la orden 
+    private Socket client; //salon
+    private ServerSocket server; //cocina
+    private ObjectInputStream input; // recibe la orden 
 
     public ServerCocina(ControladorCocina cookCocina){
         Thread hiloSalon = new Thread(this);

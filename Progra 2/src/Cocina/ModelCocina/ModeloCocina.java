@@ -11,7 +11,7 @@ public class ModeloCocina {
     }
 
     public void eliminarOrden(int arr){
-       ordenes.remove(ordenes.get(arr));
+        ordenes.remove(ordenes.get(arr));
     }
     
     public void agregarOrden(Object[] arr){

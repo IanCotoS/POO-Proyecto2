@@ -11,7 +11,6 @@ public class ClienteCocina {
      */
     private Socket client;// cocina
     private ObjectOutputStream output;
-    //private int mensaje;
     private int port;
     private Object[] mens;
     

@@ -8,6 +8,7 @@ public class Mesas {
     private boolean estado; // true: ocupado
     private Orden pedido;
     private int fila,colunma; 
+    
     public Mesas(int id_mesa, int x, int j) {
         this.id_mesa = id_mesa;
         this.fila = x;

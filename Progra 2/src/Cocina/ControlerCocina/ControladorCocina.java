@@ -2,9 +2,6 @@ package Cocina.ControlerCocina;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -15,7 +12,6 @@ import ServerClient.ClienteCocina;
 public class ControladorCocina {
     public ModeloCocina cocina;
     public View vistaCocina;
-    private Pattern patron = Pattern.compile("\\d+");
     
     public ControladorCocina() {
         cocina = new ModeloCocina();

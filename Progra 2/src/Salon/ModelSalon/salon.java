@@ -46,17 +46,6 @@ public class Salon {
         }
     }
 
-    public int[] obtenerMesaOcupada(){
-        for (Mesas[] fila: mesas){
-            for (Mesas m : fila){
-                if (m.isEstado()){
-                    return m.getPosicion();
-                }
-            }
-        }
-        return null;
-    }
-
     public int[] obtenerMesa(int id_mesa){
         for (Mesas[] fila: mesas){
             for (Mesas m : fila){

@@ -24,17 +24,11 @@ public class View {
 		iniciarComponentes();
 		frmCocina.pack();
         frmCocina.setVisible(true);
-        
+
     }
 
     private void iniciarComponentes() {
         completarOrden = new JButton("Entregar Orden");
-        completarOrden.addActionListener(new ActionListener() { 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                completarPedido(completarOrden);
-            }
-        });
         completarOrden.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         model = new DefaultTableModel();
         model.addColumn("Mesa");
@@ -87,9 +81,6 @@ public class View {
                 .addComponent(contentPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );		
-    }
-
-    public void completarPedido(JButton btn){
     }
 
     public static void main(String[] args) {
