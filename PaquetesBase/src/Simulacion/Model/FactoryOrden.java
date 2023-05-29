@@ -1,7 +1,6 @@
-package Simulacion;
+package Simulacion.Model;
 
 import com.Comida.Hamburguesa.*;
-import com.Comida.Ingredientes.*;
 import com.Orden.*;
 import java.util.Random;
 

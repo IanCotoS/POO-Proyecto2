@@ -1,4 +1,4 @@
-package Simulacion;
+package Simulacion.Model;
 
 public interface Constantes {
     
