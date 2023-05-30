@@ -1,7 +1,7 @@
 package Simulacion.Model;
 
-import com.Comida.Hamburguesa.*;
-import com.Comida.Ingredientes.*;
+import Comida.Hamburguesa.*;
+import Comida.Ingredientes.*;
 import java.util.Random;
 
 public class FactoryHamburguesa {

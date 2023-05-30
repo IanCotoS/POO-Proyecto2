@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import Simulacion.View.*;
 import Simulacion.Model.*;
-import com.Orden.*;
+import Orden.*;
 
 public class ControlerSimulacion extends Thread{
     
@@ -30,7 +30,7 @@ public class ControlerSimulacion extends Thread{
     public void enviarOrden(){
         Orden newOrden = model.crearOrden();
         System.out.println(newOrden.toString());
-        // Enviar orden
+        model.enviarOrden(newOrden);
         view.mostrarOrdenEnviada();
     }
 

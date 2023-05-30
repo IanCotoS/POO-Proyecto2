@@ -1,11 +1,13 @@
 package Simulacion.Model;
 
-import com.Orden.*;
+import Orden.*;
+import ServerClient.*;
 
 public class Simulacion{
     
     private FactoryOrden creaOrdenes;
     private boolean activo;
+    private ClienteSimulacion cliente;
 
     public Simulacion(){
         creaOrdenes = new FactoryOrden();
@@ -22,5 +24,9 @@ public class Simulacion{
 
     public boolean getEstado(){
         return activo;
+    }
+
+    public void enviarOrden(Orden newOrden){
+        cliente.conectar(newOrden);
     }
 }
