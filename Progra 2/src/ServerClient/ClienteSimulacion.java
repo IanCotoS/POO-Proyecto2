@@ -7,8 +7,8 @@ import Orden.*;
 
 public class ClienteSimulacion {
 
-    Socket client;
-    ObjectOutputStream output;
+    private Socket client;
+    private ObjectOutputStream output;
 
     public ClienteSimulacion(){
     }

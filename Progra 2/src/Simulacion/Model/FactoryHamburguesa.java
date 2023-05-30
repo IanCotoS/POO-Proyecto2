@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class FactoryHamburguesa {
 
-    boolean ingredientes[];
-    Random rnd;
+    private boolean ingredientes[];
+    private Random rnd;
     
     public FactoryHamburguesa() {
         this.ingredientes = new boolean[Constantes.CANTIDAD_INGREDIENTES_MAX];

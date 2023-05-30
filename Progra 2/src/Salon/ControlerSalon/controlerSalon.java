@@ -13,12 +13,12 @@ import ServerClient.ClienteCocina;
 import ViewSalon.*;
 
 public class controlerSalon {
-    public Salon modelSalon;
+    public salon modelSalon;
     public vistaSalon view;
     private Pattern patron = Pattern.compile("\\d+"); // Expresión regular para encontrar dígitos
 
     public controlerSalon() {
-        modelSalon = new Salon();
+        modelSalon = new salon();
         view = new vistaSalon();
         this.view.enviarOrden.addActionListener(new ActionListener() { 
             @Override

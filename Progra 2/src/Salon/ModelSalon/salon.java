@@ -1,10 +1,10 @@
 package ModelSalon;
 import Orden.Orden;
 
-public class Salon {
+public class salon {
     private Mesas[][] mesas;
 
-    public Salon() {
+    public salon() {
         this.mesas = FactoryMesas.getMesas();
     }
 

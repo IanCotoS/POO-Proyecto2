@@ -9,8 +9,8 @@ import Orden.*;
 
 public class ControlerSimulacion extends Thread{
     
-    public ViewSimulacion view;
-    public Simulacion model;
+    private ViewSimulacion view;
+    private Simulacion model;
 
     public ControlerSimulacion(){
         view = new ViewSimulacion();

@@ -7,7 +7,7 @@ import java.net.Socket;
 import javax.swing.JOptionPane;
 
 import ModelSalon.Mesas;
-import ModelSalon.Salon;
+import ModelSalon.salon;
 import Orden.Orden;
 
 public class server implements Runnable{
@@ -15,13 +15,13 @@ public class server implements Runnable{
      * servidor para realizar conexión con la simulación
      */
     private Orden orden;
-    private Salon salon;
+    private salon salon;
 
     private Socket client; // simulacion
     private ServerSocket server; //salon
     private ObjectInputStream input; // recibe la orden 
 
-    public server(Salon salon){
+    public server(salon salon){
         Thread hiloSalon = new Thread(this);
         this.salon= salon;
         hiloSalon.start();

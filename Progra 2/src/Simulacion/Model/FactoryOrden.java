@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class FactoryOrden {
     
-    FactoryHamburguesa factoryHamburguesa;
-    Random rnd;
+    private FactoryHamburguesa factoryHamburguesa;
+    private Random rnd;
 
     public FactoryOrden() {
         this.factoryHamburguesa = new FactoryHamburguesa();
