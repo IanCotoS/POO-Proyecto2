@@ -44,9 +44,14 @@ public class ControlerSimulacion extends Thread{
     @Override
     public void run(){
         while (true){
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             if (model.getEstado()){
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(Constantes.ESPERA_ORDEN_MILISEGUNDOS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
