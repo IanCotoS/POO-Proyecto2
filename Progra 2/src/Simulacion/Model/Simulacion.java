@@ -12,6 +12,7 @@ public class Simulacion{
     public Simulacion(){
         creaOrdenes = new FactoryOrden();
         activo = true;
+        cliente = new ClienteSimulacion();
     }
 
     public Orden crearOrden(){

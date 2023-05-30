@@ -50,12 +50,18 @@ public class ControlerSimulacion extends Thread{
                 e.printStackTrace();
             }
             if (model.getEstado()){
-                try {
-                    Thread.sleep(Constantes.ESPERA_ORDEN_MILISEGUNDOS);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                int cont = 0;
+                while (cont < 10 && model.getEstado()){
+                    try {
+                        Thread.sleep(Constantes.ESPERA_ORDEN_MILISEGUNDOS/10);
+                        cont++;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-                enviarOrden();
+                if (cont >= 10){
+                    enviarOrden();
+                }
             }
         }
     }
