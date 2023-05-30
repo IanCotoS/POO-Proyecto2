@@ -12,13 +12,13 @@ public class App {
         simulacion.start();
 
         // salon
-        controlerSalon controler = new controlerSalon();
-        ServerSalon servidorSalon = new ServerSalon(controler); // servidor para recibir ordenes listas de la cocina
-        server servidoServer = new server(controler.modelSalon);
+        controlerSalon controlerSalon = new controlerSalon();
+        ServerSalon servidorSalon = new ServerSalon(controlerSalon); // servidor para recibir ordenes listas de la cocina
+        server servidorSimulacionSalon = new server(controlerSalon.modelSalon, controlerSalon.view);
 
         //cocina
-        ControladorCocina controlador = new ControladorCocina();
-        ServerCocina servidorCocina = new ServerCocina(controlador);
+        ControladorCocina controlerCocina = new ControladorCocina();
+        ServerCocina servidorCocina = new ServerCocina(controlerCocina);
         
     }
 }

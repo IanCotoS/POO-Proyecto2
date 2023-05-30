@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import ModelSalon.Mesas;
 import ModelSalon.salon;
+import ViewSalon.vistaSalon;
 import Orden.Orden;
 
 public class server implements Runnable{
@@ -16,16 +17,17 @@ public class server implements Runnable{
      */
     private Orden orden;
     private salon salon;
+    private vistaSalon view;
 
     private Socket client; // simulacion
     private ServerSocket server; //salon
-    private ObjectInputStream input; // recibe la orden 
+    private ObjectInputStream input; // recibe la orden
 
-    public server(salon salon){
+    public server(salon salon, vistaSalon view){
         Thread hiloSalon = new Thread(this);
         this.salon= salon;
+        this.view = view;
         hiloSalon.start();
-
     }
 
     private Mesas buscarMesa(){
@@ -44,6 +46,10 @@ public class server implements Runnable{
                 if (mesa!= null){
                     int[] posicionMesa = mesa.getPosicion();
                     salon.agregarOrden(posicionMesa[0], posicionMesa[1], orden);
+                    int numM = mesa.getId_mesa();
+                    salon.agregarOrden(posicionMesa[0], posicionMesa[1], orden);
+                    view.model.addRow(new Object[]{"Mesa "+(numM+1), orden.obtenerOrden(), "En espera"});
+                    ClienteCocina clienteCocina = new ClienteCocina(new Object[]{numM, orden}, 1234);// conexión al servidor de la cocina
                 }else{
                     String mens = "No hay mesas disponibles en el salón.";
                     JOptionPane.showMessageDialog(null, mens, "Información", JOptionPane.INFORMATION_MESSAGE);

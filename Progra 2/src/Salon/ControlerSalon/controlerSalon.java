@@ -102,7 +102,7 @@ public class controlerSalon {
         int[] posicionMesa = m.getPosicion();
         int numM = m.getId_mesa();
         modelSalon.agregarOrden(posicionMesa[0], posicionMesa[1], orden);
-        this.view.model.addRow(new Object[]{"mesa "+(numM+1),this.view.pedido.obtenerOrden(), "En espera"});
+        this.view.model.addRow(new Object[]{"Mesa "+(numM+1),this.view.pedido.obtenerOrden(), "En espera"});
         ClienteCocina sClienteCocina = new ClienteCocina(new Object[]{numM, orden}, 1234);// conexión al servidor de la cocina
         this.view.pedido = new Orden();        
     }
