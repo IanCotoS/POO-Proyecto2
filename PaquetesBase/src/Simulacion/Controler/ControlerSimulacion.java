@@ -7,7 +7,7 @@ import Simulacion.View.*;
 import Simulacion.Model.*;
 import com.Orden.*;
 
-public class ControlerSimulacion{
+public class ControlerSimulacion extends Thread{
     
     public ViewSimulacion view;
     public Simulacion model;
@@ -27,7 +27,6 @@ public class ControlerSimulacion{
         }});
     }
     
-
     public void enviarOrden(){
         Orden newOrden = model.crearOrden();
         System.out.println(newOrden.toString());
@@ -38,7 +37,22 @@ public class ControlerSimulacion{
     public void cambiarEstadoHilo(){
         boolean estado = !model.getEstado();
         model.setEstado(estado);
+        System.out.println(estado);
         view.mostrarEstadoHilo(estado);
+    }
+
+    @Override
+    public void run(){
+        while (true){
+            if (model.getEstado()){
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                enviarOrden();
+            }
+        }
     }
 }
 

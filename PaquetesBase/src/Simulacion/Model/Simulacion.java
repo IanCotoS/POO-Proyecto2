@@ -9,6 +9,7 @@ public class Simulacion{
 
     public Simulacion(){
         creaOrdenes = new FactoryOrden();
+        activo = true;
     }
 
     public Orden crearOrden(){
