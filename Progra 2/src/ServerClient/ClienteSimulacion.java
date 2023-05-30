@@ -14,7 +14,6 @@ public class ClienteSimulacion {
     }
 
     public void conectar(Orden newOrden){
-        System.out.println(newOrden);
         try {
             client = new Socket("localhost", 9999);
             output = new ObjectOutputStream(client.getOutputStream());

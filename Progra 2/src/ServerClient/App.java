@@ -1,5 +1,4 @@
 package ServerClient;
-
 import Cocina.ControlerCocina.ControladorCocina;
 import ControlerSalon.controlerSalon;
 import Simulacion.Controler.ControlerSimulacion;
